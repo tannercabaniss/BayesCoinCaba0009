@@ -1,0 +1,50 @@
+---
+title: "Bayes Coin"
+author: "Tanner Cabaniss"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Bayes Coin}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r, echo=FALSE}
+library(BayesCoinCaba0009)
+```
+
+# Introduction
+This vignette will serve as a guide to work through the different problems assigned for the class exercise Bayes Coin Part II.
+
+# Single Beta Prior
+The first problem dealt with creating a plot to show the densities for the prior, likelihood, and posterior for a single beta prior.
+
+```{r, echo=FALSE, fig.width=10, fig.height=6}
+single_Beta(10, 4, 2, 8, 0.025)
+```
+
+The graph above shows the different densities as described above. There is also output for the point estimate and interval estimate of the posterior distribution. The beta distribution used in this example was beta(alpha=2, beta=8) with the confidence interval of 95% where in each tale is a=0.025.There were 10 attempts with 4 successes (n=10, y=4).
+
+# Mixed Beta Prior
+The second problem dealt with creating two plots. One for the prior and one for the posterior. The point and interval estimates were also output.
+
+```{r, echo=FALSE, fig.width=10, fig.height=6}
+double_Beta(10, 4, 0.5, 2, 8, 8, 2, 0.025)
+```
+
+The graphs above show the different densities as described above. There is also output for the point estimate and interval estimate of the posterior distribution. The beta distributions used in this example were beta(alpha=2, beta=8) and beta(alpha=8, beta=2) with the confidence interval of 95% where in each tale is a=0.025.There were 10 attempts with 4 successes (n=10, y=4).
+
+# STAN Model
+The last problem involved utilizing STAN to run a MCMC simulation on the previously described mixed prior distribution.
+```{r, echo=FALSE, fig.width=10, fig.height=6}
+run_stan_model(10, 4, 0.5, 2, 8, 8, 2, 3, 10000)
+```
+
+The output includes a histogram of the samples posterior as well as a summary of the sample including the mininum, maximum, 1st quartile, 3rd quartile, Median, and Mean.
